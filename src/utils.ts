@@ -20,4 +20,37 @@ const isEmptyObject = (obj: AnyObject): boolean => {
   return Object.keys(obj).length === 0;
 };
 
-export { isObject, deepClone, typeOf, isUndefined, isEmptyObject };
+const FRAMEWORK_COMPONENTS = [
+  'express',
+  'koa',
+  'egg',
+  'nextjs',
+  'nuxtjs',
+  'nestjs',
+  'flask',
+  'django',
+  'laravel',
+  'thinkphp',
+];
+
+const BASE_COMPONENTS = ['scf', 'apigateway', 'cos', 'layer', 'cdn', 'vpc', 'postgresql'];
+const COMPONENTS = [...BASE_COMPONENTS, ...FRAMEWORK_COMPONENTS];
+
+const isBaseComponent = (name: string) => {
+  return BASE_COMPONENTS.indexOf(name) !== -1;
+};
+
+const isFrameworkComponent = (name = 'framework') => {
+  return FRAMEWORK_COMPONENTS.indexOf(name) !== -1;
+};
+
+export {
+  isObject,
+  deepClone,
+  typeOf,
+  isUndefined,
+  isEmptyObject,
+  COMPONENTS,
+  isBaseComponent,
+  isFrameworkComponent,
+};

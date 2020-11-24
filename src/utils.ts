@@ -1,12 +1,5 @@
+import { typeOf, deepClone } from '@ygkit/object';
 import { AnyObject } from './typings';
-
-const deepClone = (obj: AnyObject): AnyObject => {
-  return JSON.parse(JSON.stringify(obj));
-};
-
-const typeOf = (obj: AnyObject): string => {
-  return Object.prototype.toString.call(obj).slice(8, -1);
-};
 
 const isUndefined = (val: any): boolean => {
   return val === undefined;
@@ -44,12 +37,21 @@ const isFrameworkComponent = (name = 'framework') => {
   return FRAMEWORK_COMPONENTS.indexOf(name) !== -1;
 };
 
+const addProperty = (obj: AnyObject, prop: string, value: any) => {
+  if (!isUndefined(value)) {
+    obj = obj || {};
+    obj[prop] = value;
+    return obj;
+  }
+};
+
 export {
-  isObject,
-  deepClone,
   typeOf,
+  deepClone,
+  isObject,
   isUndefined,
   isEmptyObject,
+  addProperty,
   COMPONENTS,
   isBaseComponent,
   isFrameworkComponent,

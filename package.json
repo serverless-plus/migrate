@@ -1,6 +1,6 @@
 {
   "name": "@slsplus/migrate",
-  "version": "0.0.1-alpha-1",
+  "version": "0.0.1-beta",
   "description": "Serverless Plus Migrate Tool",
   "main": "./dist/index.js",
   "publishConfig": {
@@ -49,6 +49,7 @@
   "author": "yugasun",
   "license": "MIT",
   "dependencies": {
+    "@ygkit/object": "^0.0.3",
     "tslib": "^2.0.1"
   },
   "devDependencies": {

@@ -44,12 +44,14 @@ function migrateFaas(oldConfigs: AnyObject, oldFaasConfigs?: AnyObject): AnyObje
 
   if (faasConfig.tags) {
     const tags = deepClone(faasConfig.tags);
-    faasConfig.tags = Object.entries(tags).map(([key, val]) => {
-      return {
-        key: key,
-        value: val,
-      };
-    });
+    if (typeOf(tags) === 'Object') {
+      faasConfig.tags = Object.entries(tags).map(([key, val]) => {
+        return {
+          key: key,
+          value: val,
+        };
+      });
+    }
   }
 
   if (faasConfig.vpcConfig) {

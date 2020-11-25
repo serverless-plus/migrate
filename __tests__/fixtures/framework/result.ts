@@ -62,11 +62,11 @@ export default {
         sources: [
           {
             src: '.next/static',
-            targetDir: '/_next/static',
+            target: '/_next/static',
           },
           {
             src: 'public',
-            targetDir: '/',
+            target: '/',
           },
         ],
       },

@@ -1,5 +1,5 @@
 import { AnyObject } from '../typings';
-import { deepClone, addProperty } from '../utils';
+import { typeOf, deepClone, addProperty } from '../utils';
 import { migrateApigw } from './apigw';
 
 /**
@@ -9,6 +9,14 @@ import { migrateApigw } from './apigw';
  */
 function migrateFaas(oldConfigs: AnyObject, oldFaasConfigs?: AnyObject): AnyObject {
   const faasConfig = deepClone(oldFaasConfigs || oldConfigs || {});
+
+  if (typeOf(faasConfig.src) === 'String') {
+    faasConfig.src = {
+      src: faasConfig.src,
+    };
+  } else {
+    faasConfig.src = faasConfig.src;
+  }
 
   if (faasConfig.functionName || oldConfigs.functionName) {
     addProperty(faasConfig, 'name', oldConfigs.functionName || oldConfigs.functionName);

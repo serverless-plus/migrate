@@ -23,6 +23,10 @@ function migrateFramework(oldConfigs: AnyObject): AnyObject {
   } else {
     newConfigs.src = oldConfigs.src;
   }
+  // add srcOriginal
+  if (oldConfigs.srcOriginal) {
+    newConfigs.srcOriginal = oldConfigs.srcOriginal;
+  }
 
   // faas
   const faasConfig = migrateFaas(oldConfigs, oldConfigs.faas || oldConfigs.functionConf);

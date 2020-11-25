@@ -1,6 +1,6 @@
 {
   "name": "@slsplus/migrate",
-  "version": "0.0.1-beta",
+  "version": "0.0.1-beta-1",
   "description": "Serverless Plus Migrate Tool",
   "main": "./dist/index.js",
   "publishConfig": {

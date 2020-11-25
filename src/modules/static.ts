@@ -10,6 +10,13 @@ function migrateStatic(oldConfigs: AnyObject): AnyObject {
   if (staticConfig.cosConf) {
     staticConfig.cos = deepClone(staticConfig.cosConf);
     delete staticConfig.cosConf;
+
+    if (staticConfig.cos.sources) {
+      staticConfig.cos.sources = staticConfig.cos.sources.map((item: AnyObject) => ({
+        src: item.src,
+        target: item.targetDir,
+      }));
+    }
   }
 
   if (staticConfig.cdnConf) {

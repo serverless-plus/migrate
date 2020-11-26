@@ -9,6 +9,7 @@ export default {
       src: './',
       exclude: ['.env'],
     },
+    framework: 'express',
     region: 'ap-guangzhou',
     functionName: 'expressDemo',
     layers: [

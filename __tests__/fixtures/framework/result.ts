@@ -5,6 +5,7 @@ export default {
   component: 'express',
   name: 'expressDemo',
   inputs: {
+    framework: 'express',
     src: {
       src: './',
       exclude: ['.env'],

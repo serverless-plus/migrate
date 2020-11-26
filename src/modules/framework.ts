@@ -1,15 +1,22 @@
+import { typeOf, deepClone } from '@ygkit/object';
 import { AnyObject } from '../typings';
-import { typeOf, isEmptyObject } from '../utils';
+import { isEmptyObject } from '../utils';
 import { migrateFaas } from './faas';
 import { migrateApigw } from './apigw';
 import { migrateStatic } from './static';
+
+function clearInvalidProps(obj: AnyObject, props: string[]) {
+  props.forEach((p: string) => {
+    delete obj[p];
+  });
+}
 
 /**
  * migrate framework configs
  * @param oldConfigs framework inputs in yaml file
  */
 function migrateFramework(oldConfigs: AnyObject): AnyObject {
-  const newConfigs: AnyObject = {};
+  const newConfigs: AnyObject = deepClone(oldConfigs);
   if (oldConfigs.region) {
     newConfigs.region = oldConfigs.region;
   }
@@ -22,10 +29,6 @@ function migrateFramework(oldConfigs: AnyObject): AnyObject {
     };
   } else {
     newConfigs.src = oldConfigs.src;
-  }
-  // add srcOriginal
-  if (oldConfigs.srcOriginal) {
-    newConfigs.srcOriginal = oldConfigs.srcOriginal;
   }
 
   // faas
@@ -44,6 +47,20 @@ function migrateFramework(oldConfigs: AnyObject): AnyObject {
   if (!isEmptyObject(staticConfig)) {
     newConfigs.static = staticConfig;
   }
+
+  // clear global old configs
+  const InvalidProps = [
+    'functionName',
+    'layers',
+    'runtime',
+    'functionConf',
+    'serviceId',
+    'serviceName',
+    'serviceDesc',
+    'apigatewayConf',
+    'staticConf',
+  ];
+  clearInvalidProps(newConfigs, InvalidProps);
 
   return newConfigs;
 }

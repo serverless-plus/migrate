@@ -10,12 +10,14 @@ import { migrateApigw } from './apigw';
 function migrateFaas(oldConfigs: AnyObject, oldFaasConfigs?: AnyObject): AnyObject {
   const faasConfig = deepClone(oldFaasConfigs || oldConfigs || {});
 
-  if (typeOf(faasConfig.src) === 'String') {
-    faasConfig.src = {
-      src: faasConfig.src,
-    };
-  } else {
-    faasConfig.src = faasConfig.src;
+  if (faasConfig.src) {
+    if (typeOf(faasConfig.src) === 'String') {
+      faasConfig.src = {
+        src: faasConfig.src,
+      };
+    } else {
+      faasConfig.src = faasConfig.src;
+    }
   }
 
   if (faasConfig.functionName || oldConfigs.functionName) {
